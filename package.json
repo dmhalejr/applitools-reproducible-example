@@ -1,0 +1,35 @@
+{
+  "name": "applitools-reproducible-example",
+  "version": "1.0.0",
+  "description": "Reproducible Example",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "chmod 777 ./scripts/update_eyessdk_types.sh && ./scripts/update_eyessdk_types.sh && rm -rf dist/ && node_modules/.bin/tsc",
+    "test": "jest --verbose --passWithNoTests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dmhalejr/applitools-reproducible-example.git"
+  },
+  "keywords": [],
+  "author": "David Hale",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dmhalejr/applitools-reproducible-example/issues"
+  },
+  "homepage": "https://github.com/dmhalejr/applitools-reproducible-example#readme",
+  "dependencies": {
+    "eyes.selenium": "^3.6.3",
+    "protractor": "^5.4.2",
+    "selenium-webdriver": "^3.6.0",
+    "typescript": "^3.4.3"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "babel-jest": "^24.7.1",
+    "jest": "^24.7.1",
+    "npm": "^6.9.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.15.0"
+  }
+}

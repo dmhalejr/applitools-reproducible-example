@@ -59,7 +59,7 @@ describe("simple test", function () {
     test("visual check", function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, browser.navigate().to("http://localhost:3000")];
+                case 0: return [4 /*yield*/, browser.navigate().to("https://www.lonelyplanet.com")];
                 case 1:
                     _a.sent();
                     return [4 /*yield*/, eyes.open(browser, "Lonely Planet", "Simple Test")];

@@ -1,4 +1,13 @@
 # applitools-reproducible-example
+### Update (4/19)
+
+Was told to update my code without async/await in Typescript and was also told the Applitools representative couldn't get my reproducible example running properly on their end. When I removed my async/await code it did not work. Added await/async back into the mix. Still not sure how the representative couldn't get my repo running properly but I will make it more clear the version of node/npm I am running before removing it completely. 
+
+```
+node v10.15.1
+npm v6.9.0
+```
+
 Reproducible Example
 
 While adopting Applitools as a possible visual regression tool to use at my job I'm having trouble figuring out some of slow down that are happening regarding creation of MutableImages.

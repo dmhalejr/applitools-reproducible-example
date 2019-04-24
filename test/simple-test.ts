@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import { WebDriver, Builder } from "selenium-webdriver";
 import { Eyes, VisualGridRunner, Target, ConsoleLogHandler, Configuration, BrowserType, DeviceName, ScreenOrientation } from "@applitools/eyes-selenium";
 

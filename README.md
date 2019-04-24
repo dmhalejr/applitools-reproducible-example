@@ -1,6 +1,10 @@
 # applitools-reproducible-example
 
 ### Update (4/24)
+Don't forget adding `testEnvironment: "node"` to your `jest.config.js` :facepalm:
+
+
+### Update (4/24)
 
 Took some time to get a working example of the visual grid solution available in the new @applitools bindings and kept running into CORS errors currently happening when attempting to work with the visual grid. Updated the reproducible example to mimic the error I am seeing. Is there a workaround for this?
 

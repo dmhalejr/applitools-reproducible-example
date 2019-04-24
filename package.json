@@ -4,7 +4,6 @@
   "description": "Reproducible Example",
   "main": "index.js",
   "scripts": {
-    "pretest": "chmod 777 ./scripts/update_eyessdk_types.sh && ./scripts/update_eyessdk_types.sh && rm -rf dist/ && node_modules/.bin/tsc",
     "test": "jest --verbose --passWithNoTests"
   },
   "repository": {
@@ -19,13 +18,14 @@
   },
   "homepage": "https://github.com/dmhalejr/applitools-reproducible-example#readme",
   "dependencies": {
+    "@applitools/eyes-selenium": "^4.16.2",
     "eyes.selenium": "^3.6.3",
-    "protractor": "^5.4.2",
-    "selenium-webdriver": "^3.6.0",
+    "selenium-webdriver": "^4.0.0-alpha.1",
     "typescript": "^3.4.3"
   },
   "devDependencies": {
     "@types/jest": "^24.0.11",
+    "@types/selenium-webdriver": "^4.0.0",
     "babel-jest": "^24.7.1",
     "jest": "^24.7.1",
     "npm": "^6.9.0",

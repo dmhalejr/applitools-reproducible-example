@@ -1,31 +1,41 @@
 import { WebDriver, Builder } from "selenium-webdriver";
-import { Eyes, ConsoleLogHandler } from "eyes.selenium";
+import { Eyes, VisualGridRunner, Target, ConsoleLogHandler, Configuration, BrowserType, DeviceName, ScreenOrientation } from "@applitools/eyes-selenium";
 
 describe("simple test", () => {
-  let browser: WebDriver;
+  let driver: WebDriver;
   let eyes: Eyes;
 
   beforeEach(async () => {
-    browser = await new Builder().forBrowser("chrome").build();
-    eyes = await new Eyes();
+    driver = await new Builder().forBrowser("chrome").build();
+    
+    eyes = await new Eyes(new VisualGridRunner());
     eyes.setLogHandler(new ConsoleLogHandler(true));
     eyes.setForceFullPageScreenshot(true);
+
+    const configuration = new Configuration();
+    configuration.setConcurrentSessions(3);
+    configuration.setAppName('Eyes Examples');
+    configuration.setTestName('My first Javascript test!');
+    configuration.addBrowser(1200, 800, BrowserType.CHROME);
+    configuration.addBrowser(1200, 800, BrowserType.FIREFOX);
+    configuration.addDeviceEmulation(DeviceName.iPhone_4, ScreenOrientation.PORTRAIT);
+
+    eyes.setConfiguration(configuration);
   });
 
   test("visual check", async () => {
-    await browser.navigate().to("https://www.lonelyplanet.com");
+    await eyes.open(driver);
 
-    await eyes.open(browser, "Lonely Planet", "Simple Test");
+    await driver.get("https://www.lonelyplanet.com");
 
-    await eyes.checkWindow("Home Page");
+    await eyes.check('Main Page', Target.window());
+
+    const results = await eyes.getRunner().getAllTestResults();
+    console.log(results); // eslint-disable-line
   });
 
   afterEach(async () => {
-    try {
-        await eyes.close(false);
-      } finally {
-        await eyes.abortIfNotClosed();
-    }
-    await browser.close();
+    await driver.close();
+    await eyes.abortIfNotClosed();
   });
 });

@@ -37,37 +37,51 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var selenium_webdriver_1 = require("selenium-webdriver");
-var eyes_selenium_1 = require("eyes.selenium");
+var eyes_selenium_1 = require("@applitools/eyes-selenium");
 describe("simple test", function () {
-    var browser;
+    var driver;
     var eyes;
     beforeEach(function () { return __awaiter(_this, void 0, void 0, function () {
+        var configuration;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, new selenium_webdriver_1.Builder().forBrowser("chrome").build()];
                 case 1:
-                    browser = _a.sent();
-                    return [4 /*yield*/, new eyes_selenium_1.Eyes()];
+                    driver = _a.sent();
+                    return [4 /*yield*/, new eyes_selenium_1.Eyes(new eyes_selenium_1.VisualGridRunner())];
                 case 2:
                     eyes = _a.sent();
                     eyes.setLogHandler(new eyes_selenium_1.ConsoleLogHandler(true));
                     eyes.setForceFullPageScreenshot(true);
+                    configuration = new eyes_selenium_1.Configuration();
+                    configuration.setConcurrentSessions(3);
+                    configuration.setAppName('Eyes Examples');
+                    configuration.setTestName('My first Javascript test!');
+                    configuration.addBrowser(1200, 800, eyes_selenium_1.BrowserType.CHROME);
+                    configuration.addBrowser(1200, 800, eyes_selenium_1.BrowserType.FIREFOX);
+                    configuration.addDeviceEmulation(eyes_selenium_1.DeviceName.iPhone_4, eyes_selenium_1.ScreenOrientation.PORTRAIT);
+                    eyes.setConfiguration(configuration);
                     return [2 /*return*/];
             }
         });
     }); });
     test("visual check", function () { return __awaiter(_this, void 0, void 0, function () {
+        var results;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, browser.navigate().to("https://www.lonelyplanet.com")];
+                case 0: return [4 /*yield*/, eyes.open(driver)];
                 case 1:
                     _a.sent();
-                    return [4 /*yield*/, eyes.open(browser, "Lonely Planet", "Simple Test")];
+                    return [4 /*yield*/, driver.get("https://www.lonelyplanet.com")];
                 case 2:
                     _a.sent();
-                    return [4 /*yield*/, eyes.checkWindow("Home Page")];
+                    return [4 /*yield*/, eyes.check('Main Page', eyes_selenium_1.Target.window())];
                 case 3:
                     _a.sent();
+                    return [4 /*yield*/, eyes.getRunner().getAllTestResults()];
+                case 4:
+                    results = _a.sent();
+                    console.log(results); // eslint-disable-line
                     return [2 /*return*/];
             }
         });
@@ -75,18 +89,11 @@ describe("simple test", function () {
     afterEach(function () { return __awaiter(_this, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0:
-                    _a.trys.push([0, , 2, 4]);
-                    return [4 /*yield*/, eyes.close(false)];
+                case 0: return [4 /*yield*/, driver.close()];
                 case 1:
                     _a.sent();
-                    return [3 /*break*/, 4];
-                case 2: return [4 /*yield*/, eyes.abortIfNotClosed()];
-                case 3:
-                    _a.sent();
-                    return [7 /*endfinally*/];
-                case 4: return [4 /*yield*/, browser.close()];
-                case 5:
+                    return [4 /*yield*/, eyes.abortIfNotClosed()];
+                case 2:
                     _a.sent();
                     return [2 /*return*/];
             }

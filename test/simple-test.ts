@@ -5,6 +5,8 @@ import { WebDriver, Builder } from "selenium-webdriver";
 import { Eyes, VisualGridRunner, Target, ConsoleLogHandler, Configuration, BrowserType, DeviceName, ScreenOrientation } from "@applitools/eyes-selenium";
 
 describe("simple test", () => {
+  console.log(process.env.APPLITOOLS_API_KEY);
+
   let driver: WebDriver;
   let eyes: Eyes;
 
@@ -29,7 +31,7 @@ describe("simple test", () => {
   test("visual check", async () => {
     await eyes.open(driver);
 
-    await driver.get("https://www.lonelyplanet.com");
+    await driver.get(process.env.URL);
 
     await eyes.check('Main Page', Target.window());
 
